@@ -84,8 +84,6 @@ def main():
             print(f"{i + 1}: {person1} and {person2} starred in {movie}")
 
 
-def shortest_path(source, target):
-  from collections import deque
 
 def shortest_path(source, target):
     frontier = deque()
