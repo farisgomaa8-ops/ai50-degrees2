@@ -85,16 +85,31 @@ def main():
 
 
 def shortest_path(source, target):
-    """
-    Returns the shortest list of (movie_id, person_id) pairs
-    that connect the source to the target.
+  from collections import deque
 
-    If no possible path, returns None.
-    """
+def shortest_path(source, target):
+    frontier = deque()
+    frontier.append((source, []))  # (current_person_id, path_taken_so_far)
 
-    # TODO
-    raise NotImplementedError
+    visited = set()
+    visited.add(source)
 
+    while frontier:
+        current_person, path = frontier.popleft()
+
+        for movie_id, person_id in neighbors_for_person(current_person):
+            if person_id in visited:
+                continue
+
+            new_path = path + [(movie_id, person_id)]
+
+            if person_id == target:
+                return new_path
+
+            frontier.append((person_id, new_path))
+            visited.add(person_id)
+
+    return None
 
 def person_id_for_name(name):
     """
